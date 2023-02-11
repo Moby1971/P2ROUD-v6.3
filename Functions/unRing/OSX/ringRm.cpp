@@ -66,7 +66,8 @@ using namespace std;
 
 #define PI  3.1416
 
-// mex -v -L/usr/local/lib -lfftw3 -I/usr/local/include/ ringRm.cpp
+// mex -v -compatibleArrayDims -L/usr/local/lib -lfftw3 -I/usr/local/include/ ringRm.cpp
+// mex -compatibleArrayDims -lfftw2-2 ringRm.cpp
 
 void unring_1D(fftw_complex *data,int n, int numlines,int nsh,int minW, int maxW)
 {
@@ -96,6 +97,10 @@ void unring_1D(fftw_complex *data,int n, int numlines,int nsh,int minW, int maxW
 
     double TV1arr[2*nsh+1];
     double TV2arr[2*nsh+1];
+
+//    Windows
+//    double *TV1arr = (double*) malloc(sizeof(int)*(2*nsh+1));
+//    double *TV1arr = (double*) malloc(sizeof(int)*(2*nsh+1));
 
     for (int k = 0; k < numlines; k++)
     {
@@ -240,7 +245,7 @@ void unring_1D(fftw_complex *data,int n, int numlines,int nsh,int minW, int maxW
 
 // void unring_2D(fftw_complex *data1,fftw_complex *tmp2, const int *dim_sz, int nsh, int minW, int maxW)
 
-void unring_2D(fftw_complex *data1,fftw_complex *tmp2, const unsigned long *dim_sz, int nsh, int minW, int maxW)
+void unring_2D(fftw_complex *data1,fftw_complex *tmp2, const mwSize *dim_sz, int nsh, int minW, int maxW)
 {
 
 
@@ -297,10 +302,6 @@ void unring_2D(fftw_complex *data1,fftw_complex *tmp2, const unsigned long *dim_
             double cj = (1+cos(2*PI*(double(j)/dim_sz[0])))*0.5 +eps;
             tmp1[k*dim_sz[0]+j][0] = nfac*(tmp1[k*dim_sz[0]+j][0]  + tmp2[j*dim_sz[1]+k][0] ) ;
             tmp1[k*dim_sz[0]+j][1] = nfac*(tmp1[k*dim_sz[0]+j][1]  + tmp2[j*dim_sz[1]+k][1] ) ;
-            //           tmp1[k*dim_sz[0]+j][0] = nfac*(tmp1[k*dim_sz[0]+j][0]  + tmp2[j*dim_sz[1]+k][0] ) /(ck+cj);
-            //           tmp1[k*dim_sz[0]+j][1] = nfac*(tmp1[k*dim_sz[0]+j][1]  + tmp2[j*dim_sz[1]+k][1] ) /(ck+cj);
-            //                 tmp1[k*dim_sz[0]+j][0] = nfac*(tmp1[k*dim_sz[0]+j][0]*ck  + tmp2[j*dim_sz[1]+k][0]*cj ) /(ck+cj);
-            //                 tmp1[k*dim_sz[0]+j][1] = nfac*(tmp1[k*dim_sz[0]+j][1]*ck  + tmp2[j*dim_sz[1]+k][1]*cj ) /(ck+cj);
         }
     }
 
@@ -327,7 +328,7 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
     const int numdim = mxGetNumberOfDimensions(Img);
     //    const int *dim_sz = mxGetDimensions(Img);
     // const unsigned long *dim_sz = mxGetDimensions(Img);
-    const unsigned long *dim_sz = mxGetDimensions(Img);
+    const mwSize *dim_sz = mxGetDimensions(Img);
     double *data = (double*) mxGetData(Img);
     double *data_i = (double*) mxGetImagData(Img);
 
@@ -444,62 +445,7 @@ void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
         fftw_free(data_complex);
         fftw_free(res_complex);
     }
-    //     else if (numdim == 3)
-    //     {
-    //
-    //         fftw_complex *data_complex =  (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * dim_sz[0]*dim_sz[1]*dim_sz[2]);
-    //         fftw_complex *res_complex  =  (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * dim_sz[0]*dim_sz[1]*dim_sz[2]);
-    //         if (data_i == 0)
-    //         {
-    //             plhs[0] = mxCreateNumericArray(numdim,dim_sz,mxGetClassID(Img),mxREAL);
-    //             for (int i = 0 ; i < dim_sz[2];i++)
-    //                 for (int k = 0 ; k < dim_sz[1];k++)
-    //                    for (int j = 0 ; j < dim_sz[0];j++)
-    //                    {
-    //                         data_complex[i*dim_sz[0]*dim_sz[1]+ k*dim_sz[0]+j][0] = data[i*dim_sz[0]*dim_sz[1]+k*dim_sz[0]+j];
-    //                         data_complex[i*dim_sz[0]*dim_sz[1]+ k*dim_sz[0]+j][1] = 0;
-    //                    }
-    //         }
-    //         else
-    //         {
-    //             plhs[0] = mxCreateNumericArray(numdim,dim_sz,mxGetClassID(Img),mxCOMPLEX);
-    //             for (int i = 0 ; i < dim_sz[2];i++)
-    //                 for (int k = 0 ; k < dim_sz[1];k++)
-    //                    for (int j = 0 ; j < dim_sz[0];j++)
-    //                    {
-    //                         data_complex[i*dim_sz[0]*dim_sz[1]+ k*dim_sz[0]+j][0] = data[i*dim_sz[0]*dim_sz[1]+k*dim_sz[0]+j];
-    //                         data_complex[i*dim_sz[0]*dim_sz[1]+ k*dim_sz[0]+j][1] = data_i[i*dim_sz[0]*dim_sz[1]+k*dim_sz[0]+j];
-    //                    }
-    //         }
-    //
-    //         unring_3d(data_complex,res_complex, dim_sz,nsh);
-    //
-    //         double *res =  (double*) mxGetData(plhs[0]);
-    //         double *res_i =  (double*) mxGetImagData(plhs[0]);
-    //
-    //         if (res_i == 0)
-    //         {
-    //                for (int i = 0 ; i < dim_sz[2];i++)
-    //                   for (int k = 0 ; k < dim_sz[1];k++)
-    //                       for (int j = 0 ; j < dim_sz[0];j++)
-    //                          res[i*dim_sz[0]*dim_sz[1]+ k*dim_sz[0]+j] = res_complex[i*dim_sz[0]*dim_sz[1]+ k*dim_sz[0]+j][0];
-    //         }
-    //         else
-    //         {
-    //                for (int i = 0 ; i < dim_sz[2];i++)
-    //                   for (int k = 0 ; k < dim_sz[1];k++)
-    //                       for (int j = 0 ; j < dim_sz[0];j++)
-    //                       {
-    //                          res[i*dim_sz[0]*dim_sz[1]+ k*dim_sz[0]+j] = res_complex[i*dim_sz[0]*dim_sz[1]+ k*dim_sz[0]+j][0];
-    //                          res_i[i*dim_sz[0]*dim_sz[1]+ k*dim_sz[0]+j] = res_complex[i*dim_sz[0]*dim_sz[1]+ k*dim_sz[0]+j][1];
-    //                       }
-    //         }
-    //
-    //         fftw_free(data_complex);
-    //         fftw_free(res_complex);
-    //     }
-
-
+   
 }
 
 

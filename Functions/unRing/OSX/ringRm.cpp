@@ -243,7 +243,7 @@ void unring_1D(fftw_complex *data,int n, int numlines,int nsh,int minW, int maxW
 }
 
 
-// void unring_2D(fftw_complex *data1,fftw_complex *tmp2, const int *dim_sz, int nsh, int minW, int maxW)
+ //void unring_2D(fftw_complex *data1,fftw_complex *tmp2, const int *dim_sz, int nsh, int minW, int maxW)
 
 void unring_2D(fftw_complex *data1,fftw_complex *tmp2, const mwSize *dim_sz, int nsh, int minW, int maxW)
 {

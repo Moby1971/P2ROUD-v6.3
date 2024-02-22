@@ -2,3 +2,4 @@
 .DS_Store
 @proudData/proudData.m
 proudData.m
+functions/PCAdenoise/denoise.m

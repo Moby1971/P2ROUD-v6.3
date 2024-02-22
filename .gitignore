@@ -3,3 +3,6 @@
 @proudData/proudData.m
 proudData.m
 functions/PCAdenoise/denoise.m
+functions/export/exportDicomDCM.m
+functions/export/exportDicomMRD.m
+functions/export/exportGifProud.m

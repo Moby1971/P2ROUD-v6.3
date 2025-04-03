@@ -1,1 +1,1 @@
-p2roud_version=6.0.5
+p2roud_version=6.0.1

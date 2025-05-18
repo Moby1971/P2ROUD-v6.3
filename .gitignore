@@ -12,3 +12,11 @@ functions/export/niftii/dicm_hdr.m
 functions/export/niftii/dicm_dict.m
 functions/export/niftii/dicm2nii.m
 functions/export/exportNiftiFcn.m
+functions/denoise/NLMFdenoise/NLMF2Dtree.m
+functions/denoise/NLMFdenoise/NLMF.m
+functions/denoise/NLMFdenoise/source/image2vectors_double.c
+functions/denoise/NLMFdenoise/source/image2vectors_single.c
+functions/denoise/NLMFdenoise/source/vectors_nlmeans_double.c
+functions/denoise/NLMFdenoise/source/vectors_nlmeans_single.c
+functions/epiReco/oneDimLinearCorr_entropy.m
+functions/denoise/PCAdenoise/denoise.m

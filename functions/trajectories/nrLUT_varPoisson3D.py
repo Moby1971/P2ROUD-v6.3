@@ -19,7 +19,7 @@ x_factor = 2                 # Acceleration factor
 e_shutter = True             # Elliptical shutter
 variable_density = 0.8       # Variable density
 output_folder = "./output/"  # Output folder
-show_mask = True             # Show the mask
+show_mask = False            # Show the mask
 speed = 10000                # Animation speed
 
 os.makedirs(output_folder, exist_ok=True)
@@ -136,7 +136,7 @@ if show_mask:
 
 shutter = 'E' if e_shutter else 'S'
 filename = os.path.join(
-    output_folder, f"NonRegLUT_R{AF:.2f}_M{size_of_kspace[0]}x{size_of_kspace[1]}{shutter}.txt"
+    output_folder, f"nrLUT_3D_R{AF:.2f}_M{size_of_kspace[0]}x{size_of_kspace[1]}{shutter}.txt"
 )
 
 with open(filename, 'w') as f:

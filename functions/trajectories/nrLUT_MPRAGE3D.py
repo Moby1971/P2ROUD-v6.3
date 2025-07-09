@@ -20,9 +20,9 @@ xFactor = 4                             # Desired acceleration factor (1 or high
 variableDensity = 0.8                   # Variable density (0 = uniform, >0 = more samples in the center, typical value = 0.8)
 eShutter = True                         # Elliptical shutter (True/False)
 mprageShotLength = 64                   # MPRAGE shot length
-showMask = True                         # Show k-space filling
+showMask = False                        # Show k-space filling
 movieDelay = 0.1                        # Waiting time between drawing of k-space points (s)
-outputFolder = "./"                     # Output folder
+outputFolder = "./output/"              # Output folder
 
 gifSave = False                         # Save animated gif (True/False)
 gifFrameDelay = 0.0001                  # Seconds per frame animated gif
@@ -210,7 +210,7 @@ if showMask:
 
 # Export the k-space file
 shutter = 'E' if eShutter else 'S'
-filename = f"{outputFolder}/NRLUT_MPRAGE_R{AF:.2f}_S{mprageShotLength}_M{sizeOfKspace[0]}x{sizeOfKspace[1]}{shutter}.txt"
+filename = f"{outputFolder}/nrLUT_MPRAGE_R{AF:.2f}_S{mprageShotLength}_M{sizeOfKspace[0]}x{sizeOfKspace[1]}{shutter}.txt"
 
 with open(filename, 'w') as f:
     l16, h16 = split32to16(NE)

@@ -15,10 +15,11 @@ n_trials = 1000
 size_of_center = 32
 x_factor = 2.5
 gauss_sigma = 0.15
-output_folder = Path("./output/")
-show_mask = True
+output_folder = './output/'
+show_mask = False
 speed = 100000
 
+output_folder = Path(output_folder)
 output_folder.mkdir(parents=True, exist_ok=True)
 
 
@@ -145,7 +146,7 @@ if show_mask:
     plt.show()
 
 # ---- Export LUT ----
-filename = output_folder / f"NonReg2DLUT_R{AF:.2f}_{size_of_kspace[1]}.txt"
+filename = output_folder / f"nrLUT_2D_R{AF:.2f}_{size_of_kspace[1]}.txt"
 with open(filename, 'w') as f:
     l16, h16 = split32to16(NE)
     f.write(f"{l16}\n{h16}\n")

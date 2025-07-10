@@ -121,7 +121,7 @@ if display:
 def ternary(cond, valTrue, valFalse):
     return valTrue if cond else valFalse
 
-print('\n--- k-space Trajectory Summary ---')
+print('\n--- k-space trajectory summary ---')
 print(f'Trajectory type     : Pseudo-radial')
 print(f'Dimensions (ky × kz): {dimy} × {dimz}')
 print(f'Total samples       : {numTotal}')

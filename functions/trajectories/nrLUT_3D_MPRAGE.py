@@ -20,6 +20,7 @@ xFactor = 4                             # Desired acceleration factor (1 or high
 variableDensity = 0.8                   # Variable density (0 = uniform, >0 = more samples in the center, typical value = 0.8)
 eShutter = True                         # Elliptical shutter (True/False)
 mprageShotLength = 64                   # MPRAGE shot length
+
 showMask = False                        # Show k-space filling
 movieDelay = 0.1                        # Waiting time between drawing of k-space points (s)
 outputFolder = "./output/"              # Output folder
@@ -142,7 +143,7 @@ Nacq = nCalib + nRandom
 AF = Nfull / Nacq
 NE = Nacq
 
-print('\n--- Acceleration Summary ---')
+print('\n----- k-space summary ------')
 print(f'Total Cartesian k-space points:   {Nfull}')
 print(f'Center samples:                   {nCalib}')
 print(f'Random samples:                   {nRandom}')

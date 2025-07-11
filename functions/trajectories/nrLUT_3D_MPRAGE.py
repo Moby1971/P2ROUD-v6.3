@@ -14,7 +14,7 @@ from time import sleep
 
 # User input
 
-sizeOfKspace = [128, 128]               # Size of k-space
+sizeOfKspace = [192, 192]               # Size of k-space
 sizeOfCenter = [16, 16]                 # Size of center-filled region
 xFactor = 4                             # Desired acceleration factor (1 or higher)
 variableDensity = 0.8                   # Variable density (0 = uniform, >0 = more samples in the center, typical value = 0.8)
@@ -108,7 +108,9 @@ def poissonPattern(SizeY=128, SizeZ=128, VariableDensity=0.8, AccelFactor=2, Ell
     mask[subZ, subY] = True
     mask[maskCalib] = True
     z, y = np.where(mask)
-    samples = np.stack([y - SizeY // 2 - 1, z - SizeZ // 2 - 1], axis=1)
+    samples = np.stack([y - SizeY // 2, z - SizeZ // 2], axis=1)
+    samples[:, 0] = np.clip(samples[:, 0], -SizeY // 2, SizeY // 2 - 1)
+    samples[:, 1] = np.clip(samples[:, 1], -SizeZ // 2, SizeZ // 2 - 1)
 
     return mask, samples, mask, n_calib, n_random
 
@@ -143,6 +145,9 @@ Nacq = nCalib + nRandom
 AF = Nfull / Nacq
 NE = Nacq
 
+ky_min, kz_min = samples.min(axis=0)
+ky_max, kz_max = samples.max(axis=0)
+
 print('\n----- k-space summary ------')
 print(f'Total Cartesian k-space points:   {Nfull}')
 print(f'Center samples:                   {nCalib}')
@@ -150,6 +155,8 @@ print(f'Random samples:                   {nRandom}')
 print(f'Total acquired samples:           {Nacq}')
 print(f'Requested acceleration factor:    {xFactor:.4f}')
 print(f'Effective acceleration factor:    {AF:.4f}')
+print(f'ky range:                         {ky_min} to {ky_max}')
+print(f'kz range:                         {kz_min} to {kz_max}')
 
 # Fill k-space
 kz, ky = samples[:, 1], samples[:, 0]
@@ -192,8 +199,8 @@ if showMask:
     for s, sel in enumerate(shotList):
         col = colorIdx[s]
         for i in range(len(sel)):
-            ky = samples[sel[i], 0] + sizeOfKspace[0] // 2 + 1
-            kz = samples[sel[i], 1] + sizeOfKspace[1] // 2 + 1
+            ky = samples[sel[i], 0] + sizeOfKspace[0] // 2
+            kz = samples[sel[i], 1] + sizeOfKspace[1] // 2
             img[kz, ky] = col
         im.set_data(img)  # Update image only once per shot
         plt.pause(movieDelay)

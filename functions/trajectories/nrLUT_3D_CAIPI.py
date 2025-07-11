@@ -29,14 +29,15 @@ def caipirinha3D_pattern(size_of_kspace, Ry, Rz, ACSdim):
     ky_dim, kz_dim = size_of_kspace
     mask = np.zeros((ky_dim, kz_dim), dtype=bool)
 
-    cy = (ky_dim + 1) / 2
-    cz = (kz_dim + 1) / 2
-    y1 = round(cy - ACSdim[0] / 2)
-    y2 = round(cy + ACSdim[0] / 2 - 1)
-    z1 = round(cz - ACSdim[1] / 2)
-    z2 = round(cz + ACSdim[1] / 2 - 1)
+    cy = ky_dim // 2
+    cz = kz_dim // 2
+    y1 = max(0, cy - ACSdim[0] // 2)
+    y2 = min(ky_dim, cy + (ACSdim[0] + 1) // 2)
+    z1 = max(0, cz - ACSdim[1] // 2)
+    z2 = min(kz_dim, cz + (ACSdim[1] + 1) // 2)
+    
+    mask[y1:y2, z1:z2] = True
 
-    mask[y1-1:y2, z1-1:z2] = True
 
     shift_count = 0
     for kz in range(1, kz_dim + 1):
@@ -51,10 +52,11 @@ def caipirinha3D_pattern(size_of_kspace, Ry, Rz, ACSdim):
                 mask[ky - 1, kz - 1] = True
 
     samples = []
-    for ky in range(1, ky_dim + 1):
-        for kz in range(1, kz_dim + 1):
-            if mask[ky - 1, kz - 1]:
-                samples.append([ky - (ky_dim // 2) - 1, kz - (kz_dim // 2) - 1])
+    for ky in range(ky_dim):
+        for kz in range(kz_dim):
+            if mask[ky, kz]:
+                samples.append([ky - ky_dim // 2, kz - kz_dim // 2])
+                
     return mask, np.array(samples)
 
 # Split 32-bit to 2x 16-bit
@@ -76,12 +78,17 @@ AF = mask.size / np.count_nonzero(mask)
 NE = samples.shape[0]
 file_name = output_folder / f"nrLUT_3D_CAIPI_R{AF:.2f}_{size_of_kspace[0]}x{size_of_kspace[1]}.txt"
 
+ky_min, kz_min = samples.min(axis=0)
+ky_max, kz_max = samples.max(axis=0)
+
 print('\n------- CAIPIRINHA 3D k-space summary -------')
 print(f'K-space size               : {size_of_kspace[0]} x {size_of_kspace[1]}')
 print(f'ACS size                   : {acs_size[0]} x {acs_size[1]}')
 print(f'Undersampling              : {Ry} x {Rz}')
 print(f'Effective acceleration     : {AF:.2f}')
 print(f'Encodes (lines)            : {NE}')
+print(f'ky range                   : {ky_min} to {ky_max}')
+print(f'kz range                   : {kz_min} to {kz_max}')
 print(f'Output file                : {file_name}\n')
 
 # Display a slice of the mask (optional)

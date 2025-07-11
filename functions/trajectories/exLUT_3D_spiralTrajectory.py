@@ -144,6 +144,9 @@ if display:
 def ternary(cond, valTrue, valFalse):
     return valTrue if cond else valFalse
 
+ky_min, kz_min = kSpaceList.min(axis=0)
+ky_max, kz_max = kSpaceList.max(axis=0)
+
 print('\n--- k-space trajectory summary ---')
 print(f'Trajectory type        : Pseudo-spiral')
 print(f'Dimensions (ky × kz)   : {dimy} × {dimz}')
@@ -154,5 +157,7 @@ print(f'Spiral direction       : {ternary(order==1, "Alternating", "Unidirection
 print(f'Golden angle used      : {tinyGoldenAngles[angleNr-1]:.5f}° (index {angleNr})')
 print(f'Effective spirals      : {effectiveSpirals}')
 print(f'Revolutions per spiral : {rev}')
+print(f'ky range               : {ky_min} to {ky_max}')
+print(f'kz range               : {kz_min} to {kz_max}')
 print(f'Output file            : {filename}')
 print('----------------------------------\n')

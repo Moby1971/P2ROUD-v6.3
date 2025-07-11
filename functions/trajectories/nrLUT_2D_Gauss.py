@@ -120,11 +120,12 @@ if show_kspace:
     plt.title(f'Mask\nR = {AF:.4f}\nN = {NE}', fontsize=14)
 
     ky = np.unique(samples[:, 0])
-    ky_idx = ky + size_of_kspace[1] // 2 + 1
-    ky_idx = ky_idx[(ky_idx >= 1) & (ky_idx <= size_of_kspace[1])]
+    ky_idx = ky + size_of_kspace[1] // 2
+    ky_idx = ky_idx[(ky_idx >= 0) & (ky_idx < size_of_kspace[1])]
 
     for k in ky_idx:
-        frame_mask[:, int(k) - 1] = True
+        frame_mask[:, int(k)] = True
+
         img.set_data(frame_mask)
         plt.pause(1 / speed)
 
@@ -146,12 +147,16 @@ with open(filename, 'w') as f:
     for sample in samples:
         f.write(f"{int(sample[0])}\n0\n")
 
+ky_min = int(samples[:, 0].min())
+ky_max = int(samples[:, 0].max())
+
 # Summary
 print('\n------- k-space summary -------')
 print(f'K-space size       : {size_of_kspace[0]} x {size_of_kspace[1]}')
 print(f'Center lines       : {center_lines}')
 print(f'Acceleration       : {AF:.2f}')
 print(f'Encodes (lines)    : {NE}')
+print(f'ky range           : {ky_min} to {ky_max}')
 print(f'Gaussian sigma     : {gauss_sigma:.2f} ({100 * gauss_sigma:.1f}% of PE size)')
 print(f'Trials run         : {n_trials}')
 print(f'Best score         : {best_score:.3f}')

@@ -68,11 +68,16 @@ NE = samples.shape[0]
 
 file_name = output_folder / f"nrLUT_2D_GRAPPA_R{AF:.2f}_{size_of_kspace[1]}.txt"
 
+ky_min = int(samples[:, 0].min())
+ky_max = int(samples[:, 0].max())
+
+
 print('\n------- GRAPPA K-space summary -------')
 print(f'K-space size               : {size_of_kspace[0]} x {size_of_kspace[1]}')
 print(f'ACS lines                  : {number_of_ACS}')
 print(f'Effective Acceleration     : {AF:.2f}')
 print(f'Encodes (lines)            : {NE}')
+print(f'ky range                   : {ky_min} to {ky_max}')
 print(f'Output file                : {file_name}\n')
 
 # Display mask
@@ -84,11 +89,12 @@ if show_kspace:
     plt.axis('off')
     plt.title(f"GRAPPA Mask\nR = {AF:.4f}\nN = {NE}", fontsize=14)
     ky = np.unique(samples[:, 0])
-    ky_idx = ky + size_of_kspace[1] // 2 + 1
-    ky_idx = ky_idx[(ky_idx >= 1) & (ky_idx <= size_of_kspace[1])]
+    ky_idx = ky + size_of_kspace[1] // 2
+    ky_idx = ky_idx[(ky_idx >= 0) & (ky_idx < size_of_kspace[1])]
 
     for idx in ky_idx:
-        frame_mask[:, int(idx) - 1] = True
+        frame_mask[:, int(idx)] = True
+
         img.set_data(frame_mask)
         plt.pause(1 / speed)
 

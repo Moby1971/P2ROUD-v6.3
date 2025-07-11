@@ -121,6 +121,9 @@ if display:
 def ternary(cond, valTrue, valFalse):
     return valTrue if cond else valFalse
 
+ky_min, kz_min = kSpaceArray.min(axis=0)
+ky_max, kz_max = kSpaceArray.max(axis=0)
+
 print('\n--- k-space trajectory summary ---')
 print(f'Trajectory type     : Pseudo-radial')
 print(f'Dimensions (ky × kz): {dimy} × {dimz}')
@@ -131,5 +134,7 @@ print(f'Spoke direction     : {ternary(order==1, "Alternating", "Unidirectional"
 print(f'Golden angle used   : {tinyGoldenAngles[angleNr-1]:.5f}° (index {angleNr})')
 print(f'Effective spokes    : {spokeNr}')
 print(f'Revolutions approx. : {angle / 360:.2f}')
+print(f'ky range            : {ky_min} to {ky_max}')
+print(f'kz range            : {kz_min} to {kz_max}')
 print(f'Output file         : {filename}')
 print('----------------------------------\n')

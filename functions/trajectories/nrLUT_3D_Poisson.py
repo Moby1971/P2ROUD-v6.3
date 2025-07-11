@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 # User input
-size_of_kspace = [256, 256]
+size_of_kspace = [192, 192]
 size_of_center = [32, 32]
-accel_factor = 8
+accel_factor = 3
 elliptical_shutter = True
 variable_density = 0.8
 output_folder = Path("./output/")
@@ -108,7 +108,8 @@ def poisson_pattern(SizeY, SizeZ, VariableDensity, AccelFactor, Elliptical,
     mask[mask_calib] = True
 
     z, y = np.where(mask)
-    samples = np.column_stack((y - SizeY//2 - 1, z - SizeZ//2 - 1))
+    samples = np.column_stack((y - SizeY//2, z - SizeZ//2))
+
     return mask, samples
 
 # Generate the mask and samples
@@ -134,8 +135,8 @@ if show_mask:
     plt.axis('off')
     plt.title([f'Effective acceleration factor = {AF:.2f}',
                f'Number of samples = {NE}'], fontsize=12)
-    ky = samples[:, 0] + size_of_kspace[0] // 2 + 1
-    kz = samples[:, 1] + size_of_kspace[1] // 2 + 1
+    ky = samples[:, 0] + size_of_kspace[0] // 2
+    kz = samples[:, 1] + size_of_kspace[1] // 2
     for k in range(NE):
         frame_mask[kz[k]-1, ky[k]-1] = True
         img.set_data(frame_mask)
@@ -152,6 +153,10 @@ with open(filename, 'w') as f:
     for s in samples:
         f.write(f"{int(s[0])}\n{int(s[1])}\n")
 
+
+ky_min, kz_min = samples.min(axis=0)
+ky_max, kz_max = samples.max(axis=0)
+
 # Print k-space summary
 print("\n------- k-space summary -------")
 print(f"K-space size       : {size_of_kspace[0]} x {size_of_kspace[1]}")
@@ -160,4 +165,6 @@ print(f"Acceleration       : {AF:.2f}")
 print(f"Elliptical shutter : {elliptical_shutter}")
 print(f"Variable density   : {variable_density}")
 print(f"Encodes (lines)    : {NE}")
+print(f'ky range           : {ky_min} to {ky_max}')
+print(f'kz range           : {kz_min} to {kz_max}')
 print(f"Output file        : {filename}\n")

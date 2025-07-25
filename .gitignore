@@ -20,3 +20,4 @@ functions/denoise/NLMFdenoise/source/vectors_nlmeans_double.c
 functions/denoise/NLMFdenoise/source/vectors_nlmeans_single.c
 functions/epiReco/oneDimLinearCorr_entropy.m
 functions/denoise/PCAdenoise/denoise.m
+functions/various/makeLogFile.m

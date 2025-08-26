@@ -21,3 +21,9 @@ functions/denoise/NLMFdenoise/source/vectors_nlmeans_single.c
 functions/epiReco/oneDimLinearCorr_entropy.m
 functions/denoise/PCAdenoise/denoise.m
 functions/various/makeLogFile.m
+functions/various/hex2rgb.m
+functions/various/rgb2hex.m
+functions/various/rotx.m
+functions/various/roty.m
+functions/various/rotz.m
+functions/various/svdecon.m

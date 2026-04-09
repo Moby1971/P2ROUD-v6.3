@@ -1,0 +1,14 @@
+{
+  "newestVersions": [
+    "6.8",
+    "6.7",
+    "6.6",
+    "6.5",
+    "6.4",
+    "6.3",
+    "6.2"
+  ],
+  "searchStr": "p2roud_version=",
+  "web1": "https://github.com/Moby1971/P2ROUD-v",
+  "web2": "/blob/main/appversion.txt"
+}

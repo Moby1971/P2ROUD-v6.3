@@ -27,3 +27,5 @@ functions/various/rotx.m
 functions/various/roty.m
 functions/various/rotz.m
 functions/various/svdecon.m
+functions/settings/makeDefaultSettings.m
+functions/settings/readSettingsFile.m

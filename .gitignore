@@ -29,3 +29,8 @@ functions/various/rotz.m
 functions/various/svdecon.m
 functions/settings/makeDefaultSettings.m
 functions/settings/readSettingsFile.m
+functions/denoise/BMDdenoise/BM3D.m
+functions/denoise/BMDdenoise/BM3DProfile.m
+functions/denoise/BMDdenoise/BM4D.m
+functions/denoise/BMDdenoise/BM4D_multichannel.m
+functions/denoise/BMDdenoise/BM4DProfile.m

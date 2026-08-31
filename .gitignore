@@ -1,36 +1,219 @@
 .DS_Store
+status.md
+backup/
+*.mlapp.bak
+*.pyc
+__pycache__/
+
+# ---------------------------------------------------------------------------
+# MEX sources and anything used to build them
+#
+# The compiled binaries are what ships -- the .mex files for each platform, and
+# libfftw3-3.dll beside ringRm -- so the sources they are built from stay out of
+# the repository. The patterns also cover build systems that are not in the tree
+# today, so that adding one does not quietly commit it.
+# ---------------------------------------------------------------------------
+*.c
+*.cpp
+*.cc
+*.cxx
+*.cu
+*.cuh
+*.h
+*.hpp
+*.vcxproj
+*.vcxproj.*
+*.sln
+Makefile
+makefile
+*.mk
+
+# Build projects and source archives. MATLAB Coder .prj files generate the
+# coilCombine mex; the .zip archives are the vendors' source distributions
+# (bart, fftw). None of them is needed to run the app -- the compiled binaries
+# beside them are -- so they stay local like the other build inputs.
+*.prj
+*.zip
+
+# ---------------------------------------------------------------------------
+# Build folders, excluded whole rather than by extension
+#
+#   unRing/OSX, unRing/Windows   ringRm.cpp and the fftw archives. What the app
+#                                loads -- the four ringRm.mex files and
+#                                libfftw3-3.dll -- sits outside them.
+#   coilCombine/codegen          MATLAB Coder output. The four coilCombine.mex
+#                                files the app loads sit outside it.
+# ---------------------------------------------------------------------------
+functions/unRing/OSX/
+functions/unRing/Windows/
+functions/coilCombine/codegen/
+
+# ---------------------------------------------------------------------------
+# Sources that ship as .p
+#
+# The rule: where a .p exists beside a .m, the .p is committed and the .m stays
+# local. This list is generated from the tree -- regenerate it after p-coding a
+# new source, or after moving one. An entry naming a file that has moved stops
+# ignoring anything, and that source then gets committed by accident.
+#
+# NOTE: a .m listed here is NOT in the repository. Edits to it live only on this
+# machine and in Dropbox, so a "git checkout" or "git restore" of a tracked file
+# cannot bring them back -- Dropbox version history is the only copy.
+# ---------------------------------------------------------------------------
++proud/+io/exportDicomDCM.m
++proud/+io/exportDicomMRD.m
++proud/+io/exportGifProud.m
++proud/+io/exportNiftiFcn.m
++proud/+io/importMRD.m
++proud/+io/makeLogFile.m
++proud/+io/replaceMRDparameters.m
++proud/+reco/calibrateDelays2D.m
++proud/+reco/calibrateDelays3D.m
++proud/+reco/calibrateZteDeadTime.m
++proud/+reco/estdelayToDelays.m
++proud/+reco/estimateDataOffset.m
++proud/+reco/fwdNUFT.m
++proud/+reco/homodyne.m
++proud/+reco/private/ifft3Dmri.m
++proud/+reco/private/im2row2D.m
++proud/+reco/private/im2row3D.m
++proud/+reco/private/invNUFT.m
++proud/+reco/private/lowRankThresh2D.m
++proud/+reco/private/lowRankThresh3D.m
++proud/+reco/private/partialDerivative2D.m
++proud/+reco/private/partialDerivative3D.m
++proud/+reco/private/row2im2D.m
++proud/+reco/private/row2im3D.m
++proud/+reco/private/vec.m
++proud/+reco/twoDimLinearCorr_entropy.m
++proud/+traj/trajApplyDelays.m
++proud/+traj/trajInterpolation.m
++proud/+traj/twoDradialTrajectory.m
++proud/+util/circTukey2D.m
++proud/+util/circTukey3D.m
++proud/+util/fft2Dmri.m
++proud/+util/fft3Dmri.m
++proud/+util/gyro.m
++proud/+util/ifft2Dmri.m
++proud/+util/image2Dshift.m
++proud/+util/imageWindowLevel.m
++proud/+util/kspaceWindowLevel.m
++proud/+util/matrixInterpolate.m
++proud/+util/maxn.m
++proud/ConsoleReporter.m
++proud/Constants.m
++proud/Reporter.m
++proud/defaultCsSettings.m
++proud/defaultRecoParams.m
 @proudData/proudData.m
-functions/PCAdenoise/denoise.m
-functions/export/exportDicomDCM.m
-functions/export/exportDicomMRD.m
-functions/export/exportGifProud.m
+functions/CSreco_mat/@Emat_yxt/Emat_yxt.m
+functions/CSreco_mat/@Emat_yxt/ctranspose.m
+functions/CSreco_mat/@Emat_yxt/mtimes.m
+functions/CSreco_mat/@Emat_zyxt/Emat_zyxt.m
+functions/CSreco_mat/@Emat_zyxt/ctranspose.m
+functions/CSreco_mat/@Emat_zyxt/mtimes.m
+functions/CSreco_mat/@TVOP/TVOP.m
+functions/CSreco_mat/@TVOP/ctranspose.m
+functions/CSreco_mat/@TVOP/mtimes.m
+functions/CSreco_mat/@TVOP/private/D.m
+functions/CSreco_mat/@TVOP/private/adjD.m
+functions/CSreco_mat/@TVOP/times.m
+functions/CSreco_mat/@TVOP3D/TVOP3D.m
+functions/CSreco_mat/@TVOP3D/ctranspose.m
+functions/CSreco_mat/@TVOP3D/mtimes.m
+functions/CSreco_mat/@TVOP3D/private/D.m
+functions/CSreco_mat/@TVOP3D/private/adjD.m
+functions/CSreco_mat/@TVOP3D/times.m
+functions/CSreco_mat/@Wavelet/Wavelet.m
+functions/CSreco_mat/@Wavelet/ctranspose.m
+functions/CSreco_mat/@Wavelet/mtimes.m
+functions/CSreco_mat/@Wavelet/times.m
+functions/CSreco_mat/CSL1NlCg.m
+functions/CSreco_mat/Wavelets/CDJVDyadDown.m
+functions/CSreco_mat/Wavelets/CDJVDyadUp.m
+functions/CSreco_mat/Wavelets/Contents.m
+functions/CSreco_mat/Wavelets/ContourMultiRes.m
+functions/CSreco_mat/Wavelets/DisplayMultiRes.m
+functions/CSreco_mat/Wavelets/DisplayWaveCoeff.m
+functions/CSreco_mat/Wavelets/DownDyadHi.m
+functions/CSreco_mat/Wavelets/DownDyadLo.m
+functions/CSreco_mat/Wavelets/FTWT2_PO.m
+functions/CSreco_mat/Wavelets/FWT2_PO.m
+functions/CSreco_mat/Wavelets/FWT_CDJV.m
+functions/CSreco_mat/Wavelets/FWT_IO.m
+functions/CSreco_mat/Wavelets/FWT_PO.m
+functions/CSreco_mat/Wavelets/ITWT2_PO.m
+functions/CSreco_mat/Wavelets/IWT2_PO.m
+functions/CSreco_mat/Wavelets/IWT_CDJV.m
+functions/CSreco_mat/Wavelets/IWT_IO.m
+functions/CSreco_mat/Wavelets/IWT_PO.m
+functions/CSreco_mat/Wavelets/Make2dWavelet.m
+functions/CSreco_mat/Wavelets/MakeCDJVFilter.m
+functions/CSreco_mat/Wavelets/MakeOBFilter.m
+functions/CSreco_mat/Wavelets/MakeONFilter.m
+functions/CSreco_mat/Wavelets/MakeWavelet.m
+functions/CSreco_mat/Wavelets/MirrorFilt.m
+functions/CSreco_mat/Wavelets/PlotMultiRes.m
+functions/CSreco_mat/Wavelets/PlotSpikes.m
+functions/CSreco_mat/Wavelets/PlotWaveCoeff.m
+functions/CSreco_mat/Wavelets/UpDyadHi.m
+functions/CSreco_mat/Wavelets/UpDyadLo.m
+functions/CSreco_mat/Wavelets/UpSampleN.m
+functions/CSreco_mat/Wavelets/aconv.m
+functions/CSreco_mat/Wavelets/dyad.m
+functions/CSreco_mat/Wavelets/dyad2ix.m
+functions/CSreco_mat/Wavelets/dyadlength.m
+functions/CSreco_mat/Wavelets/iconv.m
+functions/CSreco_mat/Wavelets/lshift.m
+functions/CSreco_mat/Wavelets/quad2ix.m
+functions/CSreco_mat/Wavelets/quadlength.m
+functions/CSreco_mat/Wavelets/reverse.m
+functions/CSreco_mat/Wavelets/rshift.m
+functions/CSreco_mat/fft2c_mri.m
+functions/CSreco_mat/fft3c_mri.m
+functions/CSreco_mat/ifft2c_mri.m
+functions/CSreco_mat/ifft3c_mri.m
+functions/bart/WSLPathCorrection.m
+functions/bart/bart.m
+functions/bart/readcfl.m
+functions/bart/writecfl.m
 functions/coilCombine/coilCombine.m
-manuals/P2ROUD - manual.pages
-functions/export/niftii/dicm_save.m
-functions/export/niftii/dicm_img.m
-functions/export/niftii/dicm_hdr.m
-functions/export/niftii/dicm_dict.m
-functions/export/niftii/dicm2nii.m
-functions/export/exportNiftiFcn.m
-functions/denoise/NLMFdenoise/NLMF2Dtree.m
-functions/denoise/NLMFdenoise/NLMF.m
-functions/denoise/NLMFdenoise/source/image2vectors_double.c
-functions/denoise/NLMFdenoise/source/image2vectors_single.c
-functions/denoise/NLMFdenoise/source/vectors_nlmeans_double.c
-functions/denoise/NLMFdenoise/source/vectors_nlmeans_single.c
-functions/epiReco/oneDimLinearCorr_entropy.m
+functions/denoise/BMDdenoise/BM3D.m
+functions/denoise/BMDdenoise/BM3DProfile.m
+functions/denoise/BMDdenoise/BM4D.m
+functions/denoise/BMDdenoise/BM4DProfile.m
+functions/denoise/BMDdenoise/BM4D_multichannel.m
 functions/denoise/PCAdenoise/denoise.m
-functions/various/makeLogFile.m
+functions/niftii/dicm2nii.m
+functions/niftii/dicm_dict.m
+functions/niftii/dicm_hdr.m
+functions/niftii/dicm_img.m
+functions/niftii/dicm_save.m
+functions/niftii/nii_tool.m
+functions/nufft/@nufft_3d/aNUFT.m
+functions/nufft/@nufft_3d/deap.m
+functions/nufft/@nufft_3d/density.m
+functions/nufft/@nufft_3d/fNUFT.m
+functions/nufft/@nufft_3d/iNUFT.m
+functions/nufft/@nufft_3d/kernel.m
+functions/nufft/@nufft_3d/nufft_3d.m
+functions/nufft/@nufft_3d/pruno.m
+functions/nufft/@nufft_3d/sake.m
+functions/nufft/DWT.m
+functions/nufft/fraccircshift.m
+functions/nufft/pcgL1.m
+functions/nufft/pcgpc.m
+functions/settings/makeDefaultSettings.m
+functions/settings/readSettingsFile.m
 functions/various/hex2rgb.m
 functions/various/rgb2hex.m
 functions/various/rotx.m
 functions/various/roty.m
 functions/various/rotz.m
-functions/various/svdecon.m
-functions/settings/makeDefaultSettings.m
-functions/settings/readSettingsFile.m
-functions/denoise/BMDdenoise/BM3D.m
-functions/denoise/BMDdenoise/BM3DProfile.m
-functions/denoise/BMDdenoise/BM4D.m
-functions/denoise/BMDdenoise/BM4D_multichannel.m
-functions/denoise/BMDdenoise/BM4DProfile.m
+gui/adapters/AppReporter.m
+gui/adapters/gatherRecoParams.m
+
+# ---------------------------------------------------------------------------
+# Other
+# ---------------------------------------------------------------------------
+manuals/*.pages

@@ -10,5 +10,73 @@
   ],
   "searchStr": "p2roud_version=",
   "web1": "https://github.com/Moby1971/P2ROUD-v",
-  "web2": "/blob/main/appversion.txt"
+  "web2": "/blob/main/appversion.txt",
+  "reconstruction": {
+    "sdcNumThreads": 1,
+    "sdcIterInitial": 10,
+    "sdcIterFinal": 30,
+    "sdcOsfInitial": 1.5,
+    "sdcOsfFinal": 2.1,
+    "csInnerIterations": 5,
+    "csOuterIterations2D": 2,
+    "csOuterIterations3D": 1,
+    "csNoiseScale": 2000,
+    "nufftMaxIterations": 5,
+    "nufftTikhonovPenalty": 0.5,
+    "llrBlockDivisor": 16,
+    "llrBlockMin": 8,
+    "llrRankWeight2D": 0.4,
+    "llrRankWeight3D": 0.8,
+    "minCalibSize": 32,
+    "maxGradDelay": 10,
+    "tukeyFilterWidth": 0.1,
+    "coilSensitivityCalibSize": 8,
+    "slabRatio": 80,
+    "zteCalibrationSpokes": 1000
+  },
+  "site": {
+    "defaultPatientWeight": 0.03,
+    "maxDirAttempts": 100,
+    "gifOversampleFactor": 2
+  },
+  "csDefaults": {
+    "ute3D": {
+      "wvxyz": 0.01,
+      "tvxyz": 0,
+      "llrxyz": 0,
+      "llrxyzGpu": 0,
+      "tvtime": 0,
+      "zteIterations": 30
+    },
+    "cartesian3D": {
+      "wvxyz": 0.01,
+      "tvxyz": 0,
+      "llrxyz": 0,
+      "llrxyzGpu": 0.005,
+      "tvtime": 0.05
+    },
+    "cartesian2D": {
+      "wvxyz": 0.001,
+      "tvxyz": 0,
+      "llrxyz": 0,
+      "llrxyzGpu": 0.0005,
+      "tvtime": 0
+    },
+    "radial2D": {
+      "wvxyz": 0.01,
+      "tvxyz": 0,
+      "llrxyz": 0,
+      "llrxyzGpu": 0.005,
+      "tvtime": 0,
+      "zteIterations": 30
+    },
+    "zte": {
+      "wvxyz": 0.01,
+      "tvxyz": 0,
+      "llrxyz": 0,
+      "llrxyzGpu": 0.005,
+      "tvtime": 0,
+      "zteIterations": 30
+    }
+  }
 }

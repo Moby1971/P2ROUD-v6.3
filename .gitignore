@@ -217,5 +217,4 @@ gui/adapters/gatherRecoParams.m
 # Other
 # ---------------------------------------------------------------------------
 manuals/*.pages
-tests/runTests.m
 /tests

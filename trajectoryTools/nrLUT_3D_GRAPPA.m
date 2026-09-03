@@ -1,10 +1,37 @@
-
-%% 3D GRAPPA-style undersampled k-space generator
+% 3D GRAPPA-style undersampled k-space generator
 %
-% Gustav Strijkers
-% g.j.strijkers@amsterdamumc.nl
-% July 2025
+% Author : Gustav Strijkers
+% Date   : 2026-09-02
 %
+% Purpose:
+%   Generate the undersampling look-up table for a 3D GRAPPA-style acquisition:
+%   every Ry-th ky and every Rz-th kz, with a fully sampled ACS block at the
+%   centre.
+%
+% How it works:
+%   The 2D pattern of nrLUT_2D_GRAPPA extended to both phase encoding
+%   directions. The sampled positions form a plain rectangular lattice, so the
+%   aliasing is coherent -- Ry*Rz discrete copies of the object -- which is what
+%   the parallel imaging reconstruction unfolds.
+%
+%   Unlike nrLUT_3D_CAIPI the lattice is not shifted from one ky to the next, so
+%   the replicas sit on top of one another. That is simpler and reconstructs at
+%   a higher g-factor; CAIPIRINHA is the variant to use when the acceleration is
+%   high enough for that to matter.
+%
+%   The ACS block at the centre is the training data the GRAPPA kernel is fitted
+%   from, and its size trades calibration quality against the acceleration
+%   actually achieved.
+%
+%   Ry and Rz are rounded to integers.
+%
+% Inputs:
+%   none - a script; the values under "User input" below are the settings, and
+%          are meant to be edited before running
+%
+% Output:
+%   none - writes the look-up table to outputFolder, and shows the sampling
+%          pattern when asked to
 
 clearvars;
 close all;

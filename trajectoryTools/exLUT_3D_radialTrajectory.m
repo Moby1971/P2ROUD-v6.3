@@ -1,11 +1,46 @@
-% ------------------------------------------------------------------------------------
-%  Pseudo radial k-space trajectory
-%  For MR Solutions custom 3D k-space (pe1_order = 4: exLUT)
+% Pseudo radial 3D k-space trajectory (exLUT)
 %
-%  Gustav Strijkers
-%  July 2025
+% Author : Gustav Strijkers
+% Date   : 2026-09-02
 %
-% ------------------------------------------------------------------------------------
+% Purpose:
+%   Generate the explicit k-space look-up table for a pseudo-radial 3D
+%   acquisition, for MR Solutions custom k-space with pe1_order = 4 (exLUT).
+%
+% How it works:
+%   The acquisition is Cartesian -- the sequence can only visit points on the
+%   ky-kz grid -- so a true radial trajectory is not available. What is built
+%   instead is a set of spokes drawn across that grid at golden-angle
+%   increments, with each spoke's points rounded onto the nearest grid
+%   positions and duplicates dropped.
+%
+%   That gives radial sampling's useful properties on Cartesian hardware: every
+%   spoke passes through the centre, so the low frequencies are heavily
+%   oversampled, and the periphery is covered ever more sparsely with distance.
+%
+%   The angle increment is one of the tiny golden angles rather than a fixed
+%   step. A golden-angle increment never repeats, so any run of consecutive
+%   spokes covers the circle roughly evenly -- which is what allows a
+%   reconstruction to use whatever subset of spokes it ends up with.
+%
+%   The spokes are confined to an ellipse matched to the ky and kz extents,
+%   since the corners of the rectangular grid lie beyond the resolution the
+%   acquisition provides.
+%
+%   Spokes are generated until the target number of distinct grid points is
+%   reached, so the list length is driven by coverage rather than by a spoke
+%   count decided in advance.
+%
+%   With order = 1 the spokes alternate direction, out and back, which keeps
+%   consecutive readouts from all starting at the same edge of k-space.
+%
+% Inputs:
+%   none - a script; the values under "Initialization" below are the settings,
+%          and are meant to be edited before running
+%
+% Output:
+%   none - writes the look-up table to outputdir when exportList is set, and
+%          animates the trajectory when display is set
 
 
 

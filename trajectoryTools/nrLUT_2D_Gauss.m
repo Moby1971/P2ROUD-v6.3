@@ -1,9 +1,41 @@
-%% 2D undersampled k-space maker using Gaussian weighting and PSF selection
+% 2D undersampled k-space by Gaussian weighting and PSF selection
 %
-% Gustav Strijkers
-% g.j.strijkers@amsterdamumc.nl
-% July 2025
+% Author : Gustav Strijkers
+% Date   : 2026-09-02
 %
+% Purpose:
+%   Generate the undersampling look-up table for a 2D compressed sensing
+%   acquisition, choosing the best of many random candidates.
+%
+% How it works:
+%   Lines are drawn at random with a Gaussian probability centred on the middle
+%   of k-space, so the centre is sampled densely and the periphery sparsely.
+%   That matches where the energy is: the centre carries the contrast and the
+%   gross structure, the periphery the fine detail.
+%
+%   Randomness is the point. Compressed sensing needs the aliasing to be
+%   incoherent -- noise-like rather than a set of discrete copies -- because a
+%   sparsity penalty can remove noise and cannot remove a coherent replica. A
+%   regular pattern like nrLUT_2D_GRAPPA is exactly what must be avoided here.
+%
+%   A block at the centre is filled completely regardless, since the lowest
+%   frequencies must be measured rather than inferred.
+%
+%   Many masks are generated and scored by their point spread function, and the
+%   best is kept. Any single random draw can happen to leave a gap or a
+%   near-periodicity, which shows up in the PSF as a sidelobe; scoring is what
+%   rejects the unlucky draws that the drawing rule cannot prevent.
+%
+%   gaussSigma is expressed relative to the phase encoding size, so one value
+%   means the same thing at any matrix size.
+%
+% Inputs:
+%   none - a script; the values under "User input" below are the settings, and
+%          are meant to be edited before running
+%
+% Output:
+%   none - writes the look-up table to outputFolder, and shows the sampling
+%          pattern when asked to
 
 clearvars;
 close all;

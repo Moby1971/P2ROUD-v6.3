@@ -1,10 +1,37 @@
-
-%% 3D CAIPIRINHA-style undersampled k-space generator
+% 3D CAIPIRINHA-style undersampled k-space generator
 %
-% Gustav Strijkers
-% g.j.strijkers@amsterdamumc.nl
-% July 2025
+% Author : Gustav Strijkers
+% Date   : 2026-09-02
 %
+% Purpose:
+%   Generate the undersampling look-up table for a 3D CAIPIRINHA acquisition:
+%   regular undersampling in both phase encoding directions, with the pattern
+%   shifted from one ky to the next.
+%
+% How it works:
+%   Undersampling ky by Ry and kz by Rz on a plain rectangular grid aliases the
+%   object into copies stacked directly on top of one another, and coils cannot
+%   separate replicas that overlap.
+%
+%   CAIPIRINHA shifts the kz sampling positions along as ky advances. The
+%   replicas are then displaced relative to each other rather than superimposed,
+%   which spreads them across the field of view and gives the coil sensitivities
+%   room to tell them apart -- the same total acceleration, at a much lower
+%   g-factor.
+%
+%   A fully sampled ACS region at the centre supplies the calibration data the
+%   parallel imaging reconstruction learns its kernel from.
+%
+%   Ry and Rz are rounded to integers, a fractional spacing having no meaning
+%   for the acquisition.
+%
+% Inputs:
+%   none - a script; the values under "User input" below are the settings, and
+%          are meant to be edited before running
+%
+% Output:
+%   none - writes the look-up table to outputFolder, and shows the sampling
+%          pattern when asked to
 
 clearvars;
 close all;

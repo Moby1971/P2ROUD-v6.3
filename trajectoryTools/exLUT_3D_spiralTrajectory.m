@@ -1,11 +1,39 @@
-% ------------------------------------------------------------------------------------
-%  Pseudo spiral k-space trajectory
-%  For MR Solutions custom 3D k-space (pe1_order = 4: exLUT)
+% Pseudo spiral 3D k-space trajectory (exLUT)
 %
-%  Gustav Strijkers
-%  July 2025
+% Author : Gustav Strijkers
+% Date   : 2026-09-02
 %
-% ------------------------------------------------------------------------------------
+% Purpose:
+%   Generate the explicit k-space look-up table for a pseudo-spiral 3D
+%   acquisition, for MR Solutions custom k-space with pe1_order = 4 (exLUT).
+%
+% How it works:
+%   As the radial generator beside it, the path is drawn across the Cartesian
+%   ky-kz grid and its points rounded onto grid positions, since the sequence
+%   can only visit points that exist.
+%
+%   A spiral rather than a set of straight spokes: the radius grows as the angle
+%   advances, so one continuous path works outward from the centre of k-space.
+%   That covers k-space with far fewer direction reversals than radial spokes,
+%   and the sampling density falls off smoothly rather than in discrete arms.
+%
+%   The angular increment is one of the tiny golden angles, so successive turns
+%   do not fall on top of one another and the coverage stays even for whatever
+%   part of the list is used.
+%
+%   The path is confined to an ellipse matched to the ky and kz extents, the
+%   corners of the grid lying beyond the achieved resolution.
+%
+%   With order = 1 the direction alternates, so the path does not always run
+%   outward from the centre.
+%
+% Inputs:
+%   none - a script; the values under "Initialization" below are the settings,
+%          and are meant to be edited before running
+%
+% Output:
+%   none - writes the look-up table to outputdir when exportList is set, and
+%          animates the trajectory when display is set
 
 
 %% clear all

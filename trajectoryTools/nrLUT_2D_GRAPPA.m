@@ -1,9 +1,39 @@
-%% 2D GRAPPA-style undersampled k-space mask generator
+% 2D GRAPPA-style undersampled k-space mask generator
 %
-% Gustav Strijkers
-% g.j.strijkers@amsterdamumc.nl
-% July 2025
+% Author : Gustav Strijkers
+% Date   : 2026-09-02
 %
+% Purpose:
+%   Generate the undersampling look-up table for a 2D GRAPPA-style acquisition:
+%   every R-th phase encoding line, plus a fully sampled block at the centre.
+%
+% How it works:
+%   Two regions with different rules. Away from the centre only every R-th line
+%   is measured, which is where the acceleration comes from; at the centre a
+%   block of ACS lines is measured in full.
+%
+%   The ACS block is what makes the reconstruction possible. GRAPPA works out
+%   how to synthesise the missing lines from the measured ones, and it can only
+%   learn that from a region where both are present -- so the fully sampled
+%   centre is training data, not merely extra signal.
+%
+%   Regular undersampling produces coherent aliasing: discrete copies of the
+%   object rather than noise. That is deliberate here, since the parallel
+%   imaging reconstruction unfolds exactly that kind of aliasing. It is the
+%   opposite of what a compressed sensing pattern wants, which is why
+%   nrLUT_2D_Gauss and nrLUT_3D_Poisson exist beside this.
+%
+%   R is rounded to an integer, since a fractional line spacing has no meaning
+%   for the acquisition, and the rounding is announced rather than done
+%   silently.
+%
+% Inputs:
+%   none - a script; the values under "User input" below are the settings, and
+%          are meant to be edited before running
+%
+% Output:
+%   none - writes the look-up table to outputFolder, and shows the sampling
+%          pattern when asked to
 
 clearvars;
 close all;

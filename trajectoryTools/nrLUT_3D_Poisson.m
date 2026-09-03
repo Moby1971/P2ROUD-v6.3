@@ -1,10 +1,37 @@
-%% 3D random undersampled k-space maker for pe1_order = 5 extended non-regular LUT
+% 3D Poisson-disc undersampled k-space maker
 %
-% Gustav Strijkers
-% g.j.strijkers@amsterdamumc.nl
-% June 2025
+% Author : Gustav Strijkers
+% Date   : 2026-09-02
 %
+% Purpose:
+%   Generate the undersampling look-up table for a 3D compressed sensing
+%   acquisition, with the samples spread by a Poisson-disc rule.
 %
+% How it works:
+%   Points are drawn at random, but no two are allowed closer than a minimum
+%   distance. That is what a Poisson-disc pattern is, and it is the compromise
+%   both alternatives miss: purely random sampling leaves clumps and holes, and
+%   a regular lattice produces coherent aliasing that a sparsity penalty cannot
+%   remove.
+%
+%   The minimum distance varies across k-space -- small at the centre, larger at
+%   the edge -- which gives the variable density the reconstruction wants, dense
+%   where the energy is and sparse where it is not.
+%
+%   A block at the centre is filled completely, since the lowest frequencies
+%   have to be measured rather than inferred, and an elliptical shutter can
+%   discard the corners that lie beyond the achieved resolution.
+%
+%   The result is written for pe1_order = 5, the extended non-regular look-up
+%   table, which lets the sequence follow an arbitrary list of encoding steps.
+%
+% Inputs:
+%   none - a script; the values under "User input" below are the settings, and
+%          are meant to be edited before running
+%
+% Output:
+%   none - writes the look-up table to outputFolder, and shows the sampling
+%          pattern when asked to
 
 clearvars;
 close all;

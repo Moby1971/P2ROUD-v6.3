@@ -1,16 +1,37 @@
-%% ---------------------------
+% Segmented zig-zag 2D trajectory (exLUT)
 %
-% Zig-zag trajectory with random k-space filling and fully sampled k-space center
-% Fill 16s repetitions of a 192 matrix
-% K-space center = 12 fully sampled lines
-% 
+% Author : Gustav Strijkers
+% Date   : 2026-09-02
 %
-% Gustav Strijkers
-% July 2025
+% Purpose:
+%   Generate the explicit k-space look-up table for a segmented 2D acquisition:
+%   a zig-zag through randomly filled k-space with a fully sampled centre.
 %
+% How it works:
+%   The list is built for 16 repetitions of a 192 line matrix with 12 fully
+%   sampled centre lines. The centre is always measured, since the lowest
+%   frequencies must be acquired rather than inferred; the remaining lines are
+%   drawn at random, so the aliasing is incoherent and a compressed sensing
+%   reconstruction can remove it.
 %
+%   The few lines closest to the centre are excluded from the random draw, so
+%   they are covered by the fully sampled block and not measured twice.
 %
+%   Within a repetition the order is a zig-zag: successive readouts alternate
+%   between the two halves of k-space rather than walking steadily from one edge
+%   to the other. That spreads any drift through the acquisition over the image
+%   instead of letting it accumulate across neighbouring lines.
 %
+%   The whole construction sits in a loop that retries until a list satisfying
+%   the constraints is produced, the random draw not being guaranteed to give
+%   one on the first attempt.
+%
+% Inputs:
+%   none - a script; the sizes are set in the code below and are meant to be
+%          edited before running
+%
+% Output:
+%   none - the look-up table, in the workspace and written out
 
 clearvars
 

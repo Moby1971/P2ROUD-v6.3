@@ -1,4 +1,39 @@
-%% test
+% 3D UTE spoke direction schemes compared
+%
+% Author : Gustav Strijkers
+% Date   : 2026-09-02
+%
+% Purpose:
+%   Compare the ways of spreading 3D UTE spoke directions over the sphere, and
+%   see them against a trajectory the scanner actually used.
+%
+% How it works:
+%   A scratch script for looking at three schemes side by side, each plotted as
+%   points on a sphere of radius 32767 -- the int16 range the look-up table is
+%   stored in.
+%
+%   First a table read back from a scanner acquisition, so the others can be
+%   judged against something real rather than only against each other.
+%
+%   Then the 3D golden means construction: two irrational multipliers, 0.4656
+%   and 0.6823, are stepped and taken modulo 1 to give the two spherical angles.
+%   Being irrational, the sequence never repeats, so any run of consecutive
+%   spokes covers the sphere roughly evenly -- which is what lets a
+%   reconstruction bin an arbitrary subset of them.
+%
+%   Then phyllotaxis, the arrangement of seeds in a sunflower head. Points are
+%   placed at evenly spaced heights on the sphere with the azimuth advancing by
+%   a golden-angle-derived step, which gives a more uniform instantaneous
+%   coverage than the golden means at the cost of a stricter ordering. The two
+%   halves of the loop work outward from the equator in both directions, so a
+%   truncated list stays balanced about it.
+%
+% Inputs:
+%   none - a script; the path to the scanner look-up table and the point counts
+%          are set in the code below
+%
+% Output:
+%   none - scatter plots of the three schemes
 
 clc;
 clearvars;

@@ -1,10 +1,42 @@
-%% 3D MPRAGE random undersampled k-space maker for pe1_order = 5 extended non-regular LUT
+% 3D MPRAGE random undersampled k-space maker
 %
-% Gustav Strijkers
-% g.j.strijkers@amsterdamumc.nl
-% July 2025
+% Author : Gustav Strijkers
+% Date   : 2026-09-02
 %
+% Purpose:
+%   Generate the undersampling look-up table for a 3D MPRAGE acquisition, where
+%   the sampling has to be random for the reconstruction and ordered within each
+%   shot for the contrast.
 %
+% How it works:
+%   The set of points to measure is drawn at random with a variable density,
+%   denser at the centre of k-space than at the edge, so the aliasing is
+%   incoherent and a compressed sensing reconstruction can remove it. An
+%   elliptical shutter can discard the corners, which lie beyond the resolution
+%   the acquisition actually provides.
+%
+%   What is particular to MPRAGE is the ordering. The magnetisation recovers
+%   through each shot, so the signal changes from one readout to the next within
+%   it, and which k-space point is measured when determines the contrast. The
+%   points are therefore grouped into shots of mprageShotLength and ordered
+%   inside each so that the centre of k-space is measured at the same point in
+%   the recovery every time.
+%
+%   Getting that wrong does not undersample anything incorrectly -- it changes
+%   the image contrast, which is harder to notice and impossible to correct
+%   afterwards.
+%
+%   The result is written for pe1_order = 5, the extended non-regular look-up
+%   table, which is the ordering mode that lets the sequence follow an arbitrary
+%   list.
+%
+% Inputs:
+%   none - a script; the values under "User input" below are the settings, and
+%          are meant to be edited before running
+%
+% Output:
+%   none - writes the look-up table to outputFolder, and shows the sampling
+%          pattern when asked to
 
 clearvars;
 close all;

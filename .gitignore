@@ -66,6 +66,7 @@ functions/coilCombine/codegen/
 +proud/+io/exportNiftiFcn.m
 +proud/+io/importMRD.m
 +proud/+io/makeLogFile.m
++proud/+io/patientPosition.m
 +proud/+io/replaceMRDparameters.m
 +proud/+reco/calibrateDelays2D.m
 +proud/+reco/calibrateDelays3D.m
@@ -91,6 +92,8 @@ functions/coilCombine/codegen/
 +proud/+traj/twoDradialTrajectory.m
 +proud/+util/circTukey2D.m
 +proud/+util/circTukey3D.m
++proud/+util/dicomOrientation.m
++proud/+util/imagePosition.m
 +proud/+util/fft2Dmri.m
 +proud/+util/fft3Dmri.m
 +proud/+util/gyro.m

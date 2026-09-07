@@ -94,6 +94,7 @@ functions/coilCombine/codegen/
 +proud/+util/circTukey3D.m
 +proud/+util/dicomOrientation.m
 +proud/+util/imagePosition.m
++proud/+util/sliceSpacing.m
 +proud/+util/fft2Dmri.m
 +proud/+util/fft3Dmri.m
 +proud/+util/gyro.m

@@ -71,6 +71,9 @@ functions/coilCombine/codegen/
 +proud/+reco/calibrateDelays2D.m
 +proud/+reco/calibrateDelays3D.m
 +proud/+reco/calibrateZteDeadTime.m
++proud/+reco/epiDriftCorr.m
++proud/+reco/epiRampRegrid.m
++proud/+reco/epiReferenceCorr.m
 +proud/+reco/estdelayToDelays.m
 +proud/+reco/estimateDataOffset.m
 +proud/+reco/fwdNUFT.m
@@ -93,7 +96,9 @@ functions/coilCombine/codegen/
 +proud/+util/circTukey2D.m
 +proud/+util/circTukey3D.m
 +proud/+util/dicomOrientation.m
++proud/+util/dicomSeriesNumber.m
 +proud/+util/imagePosition.m
++proud/+util/resampleMaps.m
 +proud/+util/sliceSpacing.m
 +proud/+util/fft2Dmri.m
 +proud/+util/fft3Dmri.m

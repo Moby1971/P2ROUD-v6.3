@@ -32,7 +32,8 @@
     "tukeyFilterWidth": 0.1,
     "coilSensitivityCalibSize": 8,
     "slabRatio": 80,
-    "zteCalibrationSpokes": 1000
+    "zteCalibrationSpokes": 1000,
+    "epiRampSampling": 0
   },
   "site": {
     "defaultPatientWeight": 0.03,

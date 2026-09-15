@@ -60,6 +60,7 @@ functions/coilCombine/codegen/
 # machine and in Dropbox, so a "git checkout" or "git restore" of a tracked file
 # cannot bring them back -- Dropbox version history is the only copy.
 # ---------------------------------------------------------------------------
++proud/+io/defaultSettings.m
 +proud/+io/exportDicomDCM.m
 +proud/+io/exportDicomMRD.m
 +proud/+io/exportGifProud.m
@@ -97,6 +98,7 @@ functions/coilCombine/codegen/
 +proud/+util/circTukey3D.m
 +proud/+util/dicomOrientation.m
 +proud/+util/dicomSeriesNumber.m
++proud/+util/githubRawAddress.m
 +proud/+util/imagePosition.m
 +proud/+util/resampleMaps.m
 +proud/+util/sliceSpacing.m

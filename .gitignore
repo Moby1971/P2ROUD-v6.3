@@ -61,6 +61,10 @@ functions/coilCombine/codegen/
 # cannot bring them back -- Dropbox version history is the only copy.
 # ---------------------------------------------------------------------------
 +proud/+io/defaultSettings.m
++proud/+io/epiMaskScan.m
++proud/+io/exportDiffusionScript.m
++proud/+io/epiPartnerScan.m
++proud/+io/sqlGeometry.m
 +proud/+io/exportDicomDCM.m
 +proud/+io/exportDicomMRD.m
 +proud/+io/exportGifProud.m
@@ -71,8 +75,11 @@ functions/coilCombine/codegen/
 +proud/+io/replaceMRDparameters.m
 +proud/+reco/calibrateDelays2D.m
 +proud/+reco/calibrateDelays3D.m
-+proud/+reco/calibrateZteDeadTime.m
++proud/+reco/epiCentreEcho.m
 +proud/+reco/epiDriftCorr.m
++proud/+reco/epiPairField.m
++proud/+reco/epiPartialFourier.m
++proud/+reco/epiVolumeShift.m
 +proud/+reco/epiRampRegrid.m
 +proud/+reco/epiReferenceCorr.m
 +proud/+reco/estdelayToDelays.m
@@ -91,9 +98,14 @@ functions/coilCombine/codegen/
 +proud/+reco/private/row2im3D.m
 +proud/+reco/private/vec.m
 +proud/+reco/twoDimLinearCorr_entropy.m
++proud/+reco/zteAlgebraic3D.m
++proud/+reco/zteFeedthrough.m
++proud/+reco/zteProjectionOperator.m
 +proud/+traj/trajApplyDelays.m
++proud/+traj/sphereDensity.m
 +proud/+traj/trajInterpolation.m
 +proud/+traj/twoDradialTrajectory.m
++proud/+util/profileShift.m
 +proud/+util/circTukey2D.m
 +proud/+util/circTukey3D.m
 +proud/+util/dicomOrientation.m
@@ -104,6 +116,7 @@ functions/coilCombine/codegen/
 +proud/+util/sliceSpacing.m
 +proud/+util/fft2Dmri.m
 +proud/+util/fft3Dmri.m
++proud/+util/gridApodization.m
 +proud/+util/gyro.m
 +proud/+util/ifft2Dmri.m
 +proud/+util/image2Dshift.m
@@ -229,3 +242,8 @@ gui/adapters/gatherRecoParams.m
 # ---------------------------------------------------------------------------
 manuals/*.pages
 /tests
+manuals/P2ROUD_DTI_pipeline.docx
+manuals/P2ROUD_DTI_pipeline_detailed.docx
+manuals/P2ROUD_DTI_pipeline_detailed.pdf
+manuals/P2ROUD_fMRI_pipeline.docx
+manuals/P2ROUD_fMRI_pipeline.pdf

@@ -32,8 +32,11 @@
     "tukeyFilterWidth": 0.1,
     "coilSensitivityCalibSize": 8,
     "slabRatio": 80,
-    "zteCalibrationSpokes": 1000,
-    "epiRampSampling": 0
+    "epiRampSampling": 0,
+    "epiDistortionCorrection": 1,
+    "epiPocs": 1,
+    "epiRegistration": 1,
+    "zteRegistration": 0
   },
   "site": {
     "defaultPatientWeight": 0.03,
@@ -72,12 +75,12 @@
       "zteIterations": 30
     },
     "zte": {
-      "wvxyz": 0.01,
+      "wvxyz": 0.02,
       "tvxyz": 0,
       "llrxyz": 0,
-      "llrxyzGpu": 0.005,
+      "llrxyzGpu": 0,
       "tvtime": 0,
-      "zteIterations": 30
+      "zteIterations": 80
     }
   }
 }

@@ -73,6 +73,11 @@ functions/coilCombine/codegen/
 +proud/+io/makeLogFile.m
 +proud/+io/patientPosition.m
 +proud/+io/replaceMRDparameters.m
++proud/+io/bidsAnatomicalScan.m
++proud/+io/bidsGradientTable.m
++proud/+io/bidsWriteNifti.m
++proud/+io/exportBidsFcn.m
++proud/+io/reconstructAnatomical.m
 +proud/+reco/calibrateDelays2D.m
 +proud/+reco/calibrateDelays3D.m
 +proud/+reco/epiCentreEcho.m
@@ -98,6 +103,9 @@ functions/coilCombine/codegen/
 +proud/+reco/private/row2im3D.m
 +proud/+reco/private/vec.m
 +proud/+reco/twoDimLinearCorr_entropy.m
++proud/+reco/mppcaDenoise.m
++proud/+reco/mppcaWindow.m
++proud/+reco/smoothPhase.m
 +proud/+reco/zteAlgebraic3D.m
 +proud/+reco/zteFeedthrough.m
 +proud/+reco/zteProjectionOperator.m
@@ -124,6 +132,8 @@ functions/coilCombine/codegen/
 +proud/+util/kspaceWindowLevel.m
 +proud/+util/matrixInterpolate.m
 +proud/+util/maxn.m
++proud/+util/acquisitionTime.m
++proud/+util/quadrupedWorldMap.m
 +proud/ConsoleReporter.m
 +proud/Constants.m
 +proud/Reporter.m

@@ -88,6 +88,9 @@ functions/coilCombine/codegen/
 +proud/+reco/epiRampRegrid.m
 +proud/+reco/epiReferenceCorr.m
 +proud/+reco/estdelayToDelays.m
++proud/+reco/combineSlabs.m
++proud/+reco/llrBlockSize.m
++proud/+reco/slabGeometry.m
 +proud/+reco/estimateDataOffset.m
 +proud/+reco/fwdNUFT.m
 +proud/+reco/homodyne.m

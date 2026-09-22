@@ -23,15 +23,12 @@
     "csNoiseScale": 2000,
     "nufftMaxIterations": 5,
     "nufftTikhonovPenalty": 0.5,
-    "llrBlockDivisor": 16,
-    "llrBlockMin": 8,
     "llrRankWeight2D": 0.4,
     "llrRankWeight3D": 0.8,
     "minCalibSize": 32,
     "maxGradDelay": 10,
     "tukeyFilterWidth": 0.1,
     "coilSensitivityCalibSize": 8,
-    "slabRatio": 80,
     "epiRampSampling": 0,
     "epiDistortionCorrection": 1,
     "epiPocs": 1,
@@ -40,6 +37,7 @@
   },
   "site": {
     "defaultPatientWeight": 0.03,
+    "fieldStrength": 7,
     "maxDirAttempts": 100,
     "gifOversampleFactor": 2
   },

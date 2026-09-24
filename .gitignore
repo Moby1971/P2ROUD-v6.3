@@ -70,6 +70,7 @@ functions/coilCombine/codegen/
 +proud/+io/exportGifProud.m
 +proud/+io/exportNiftiFcn.m
 +proud/+io/importMRD.m
++proud/+io/correctGradientTable.m
 +proud/+io/makeLogFile.m
 +proud/+io/patientPosition.m
 +proud/+io/replaceMRDparameters.m
@@ -87,6 +88,7 @@ functions/coilCombine/codegen/
 +proud/+reco/epiVolumeShift.m
 +proud/+reco/epiRampRegrid.m
 +proud/+reco/epiReferenceCorr.m
++proud/+reco/epiLineOffset.m
 +proud/+reco/estdelayToDelays.m
 +proud/+reco/combineSlabs.m
 +proud/+reco/llrBlockSize.m
@@ -112,6 +114,7 @@ functions/coilCombine/codegen/
 +proud/+reco/zteAlgebraic3D.m
 +proud/+reco/zteFeedthrough.m
 +proud/+reco/zteProjectionOperator.m
++proud/+reco/zteRegisterDynamics.m
 +proud/+traj/trajApplyDelays.m
 +proud/+traj/sphereDensity.m
 +proud/+traj/trajInterpolation.m
@@ -121,6 +124,7 @@ functions/coilCombine/codegen/
 +proud/+util/circTukey3D.m
 +proud/+util/dicomOrientation.m
 +proud/+util/dicomSeriesNumber.m
++proud/+util/diffusionScheme.m
 +proud/+util/githubRawAddress.m
 +proud/+util/imagePosition.m
 +proud/+util/resampleMaps.m

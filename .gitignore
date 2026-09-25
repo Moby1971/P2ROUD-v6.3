@@ -79,6 +79,9 @@ functions/coilCombine/codegen/
 +proud/+io/bidsWriteNifti.m
 +proud/+io/exportBidsFcn.m
 +proud/+io/reconstructAnatomical.m
++proud/+io/defaultUteTrajectory.m
++proud/+io/readUteTrajectory.m
++proud/+reco/uteLargeFov.m
 +proud/+reco/calibrateDelays2D.m
 +proud/+reco/calibrateDelays3D.m
 +proud/+reco/epiCentreEcho.m
@@ -119,6 +122,8 @@ functions/coilCombine/codegen/
 +proud/+traj/sphereDensity.m
 +proud/+traj/trajInterpolation.m
 +proud/+traj/twoDradialTrajectory.m
++proud/+traj/uteSpokeTrajectory.m
++proud/+traj/uteDirectedSpokes.m
 +proud/+util/profileShift.m
 +proud/+util/circTukey2D.m
 +proud/+util/circTukey3D.m

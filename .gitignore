@@ -118,6 +118,16 @@ functions/coilCombine/codegen/
 +proud/+reco/zteFeedthrough.m
 +proud/+reco/zteProjectionOperator.m
 +proud/+reco/zteRegisterDynamics.m
+# added 2026-09-30
++proud/+io/footerPpl.m
++proud/+reco/cubicResample.m
++proud/+reco/fseAmplitudeEnvelope.m
++proud/+reco/fseNavigatorEstimates.m
++proud/+reco/fseSliceFit.m
++proud/+reco/fseSliceMasks.m
++proud/+reco/unring1D.m
++proud/+reco/unring3D.m
++proud/+reco/unringComplex.m
 +proud/+traj/trajApplyDelays.m
 +proud/+traj/sphereDensity.m
 +proud/+traj/trajInterpolation.m
